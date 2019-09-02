@@ -7,7 +7,9 @@ int main(int argc, char *argv[]) {
 		printf("Usage: ./gcd num1 num2 <base>\n");
 		return -1;
 	}
-	//TODO check convert success
+	//TODO handle a, 2
+	//TODO handle incorrect base for inputs
+	//TODO add extended euclidean algo
 
 	int base = 10;
 	if(argc == 4) {
