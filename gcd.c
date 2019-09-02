@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
-	//error checking
+	//correct # args
 	if(argc > 4 || argc < 3) {
 		printf("Usage: ./gcd num1 num2 <base>\n");
 		return -1;
@@ -19,6 +19,14 @@ int main(int argc, char *argv[]) {
 		remainder = dividend;
 		dividend = divisor;
 		divisor = remainder;
+	}
+	if(divisor == 0) {	//check for 0
+		if(dividend == 0) {
+			printf("UNDEFINED\n");
+			return 1;
+		}
+		printf("%d\n", dividend);
+		return 2;
 	}
 	remainder = dividend % divisor;
 	while(remainder != 0) {
