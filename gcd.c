@@ -9,33 +9,44 @@ int main(int argc, char *argv[]) {
 	}
 	//TODO handle a, 2
 	//TODO handle incorrect base for inputs
-	//TODO add extended euclidean algo
 
 	int base = 10;
 	if(argc == 4) {
 		base = strtol(argv[3], &argv[3], 10);
 	}
-	int dividend = strtol(argv[1], &argv[1], base), divisor = strtol(argv[2], &argv[2], base), remainder;
-
-	if(dividend < divisor) {	//dividend > divisor check
-		remainder = dividend;
-		dividend = divisor;
-		divisor = remainder;
+	//extended euclidean algo
+	int x = 1, y = 0, q, u, v, w;
+	int a = strtol(argv[1], &argv[1], base), b = strtol(argv[2], &argv[2], base);
+	int r = 0, s = 1;
+	if(a < b) {	//dividend > divisor check
+		r = a;
+		a = b;
+		b = r;
+		r = 0;
 	}
-	if(divisor == 0) {	//check for 0
-		if(dividend == 0) {
+	int g = a, t = b;
+	if(b == 0) {	//check for 0
+		if(a == 0) {
 			printf("UNDEFINED\n");
 			return 1;
 		}
-		printf("%d\n", dividend);
+		printf("%d\n", a);
 		return 2;
 	}
-	remainder = dividend % divisor;
-	while(remainder != 0) {
-		remainder = dividend % divisor;
-		dividend = divisor;
-		divisor = remainder;
+	while(t > 0) {
+		q = g/t;
+		u = x - (q*r);
+		v = y - (q*s);
+		w = g - (q*t);
+		x = r;
+		y = s;
+		g = t;
+		r = u;
+		s = v;
+		t = w;
 	}
-	printf("%d\n", abs(dividend));
+	printf("gcd(%d, %d): %d\n", a, b, g);
+	printf("x: %d\ny: %d\n", x, y);
+	printf("%d = %d(%d) + %d(%d)\n", g, a, x, b, y);
 	return 0;
 }
