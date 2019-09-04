@@ -29,6 +29,10 @@ int main(int argc, char *argv[]) {
 	int x = 1, y = 0, q, u, v, w;
 	i = 0;
 	while(*(argv[1] + i) != '\0') {
+		if((i == 0) && (*(argv[1] + i) == '-')) {
+			i++;
+			continue;
+		}
 		if(base > 10) {
 			if(((int)*(argv[1] + i) > 96) && ((int)*(argv[1] + i) < (87 + base))) {
 				*(argv[1] + i) = *(argv[1] + i) - 32;
@@ -45,6 +49,10 @@ int main(int argc, char *argv[]) {
 	}
 	i = 0;
 	while(*(argv[2] + i) != '\0') {
+		if((i == 0) && (*(argv[2] + i) == '-')) {
+			i++;
+			continue;
+		}
 		if(base > 10) {
 			if(((int)*(argv[2] + i) > 96) && ((int)*(argv[2] + i) < (87 + base))) {
 				*(argv[2] + i) = *(argv[2] + i) - 32;
@@ -59,7 +67,7 @@ int main(int argc, char *argv[]) {
 		}
 		i++;
 	}
-	//FIXME accept (-) in argv[1] and argv[2]
+	//FIXME proper calculations when there are negative args for argv[1] and argv[2]
 
 	int a = strtol(argv[1], &e, base), b = strtol(argv[2], &e, base);
 	int r = 0, s = 1;
