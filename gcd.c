@@ -67,17 +67,16 @@ int main(int argc, char *argv[]) {
 		}
 		i++;
 	}
-	//FIXME proper calculations when there are negative args for argv[1] and argv[2]
 
 	int a = strtol(argv[1], &e, base), b = strtol(argv[2], &e, base);
 	int r = 0, s = 1;
-	if(a < b) {	//a >= b check
+	if(abs(a) < abs(b)) {	//a >= b check
 		r = a;
 		a = b;
 		b = r;
 		r = 0;
 	}
-	int g = a, t = b;
+	int g = abs(a), t = abs(b);
 	if(b == 0) {	//when arg(s) == 0
 		if(a == 0) {
 			printf("UNDEFINED\n");
@@ -100,6 +99,9 @@ int main(int argc, char *argv[]) {
 		s = v;
 		t = w;
 	}
+	//deal with case where a or b are negative
+	if(a < 0) { x = x*-1; }
+	if(b < 0) { y = y*-1; }
 	printf("gcd(%d, %d): %d\n", (int)strtol(argv[1], &e, base), (int)strtol(argv[2], &e, base), g);
 	printf("x: %d\ny: %d\n", x, y);
 	printf("%d = %d(%d) + %d(%d)\n", g, a, x, b, y);
