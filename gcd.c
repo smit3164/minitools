@@ -10,21 +10,32 @@ int main(int argc, char *argv[]) {
 	}
 
 	int base = 10;
+	int i = 0;
 	if(argc == 4) {
+		while(*(argv[3] + i) != '\0') {
+			if((int)*(argv[3] + i) < 48 || (int)*(argv[3] + i) > 57) {
+				printf("Base argument must be a positive base-10 integer\nUsage: ./gcd int1 int2 <base>\n");
+				return 3;
+			}
+			i++;
+		}
 		base = strtol(argv[3], &e, 10);
-		if(base < 1) {
-			printf("Invalid base. Use base > 0\n");
+		if(base < 1 || base > 36) {
+			printf("Invalid base. Use 0 < base < 37\n");
 			return 4;
 		}
 	}
-	//TODO make sure base is an integer in base 10.
-	//FIXME error 'UNDEFINED' with base > 36.
 
 	int x = 1, y = 0, q, u, v, w;
-	int i = 0;
+	i = 0;
 	while(*(argv[1] + i) != '\0') {
 		if(base > 10) {
-			//TODO check for letters. Transform lowercase to uppercase with (-32). Copy below.
+			if(((int)*(argv[1] + i) > 96) && ((int)*(argv[1] + i) < (87 + base))) {
+				*(argv[1] + i) = *(argv[1] + i) - 32;
+			} else if(((int)*(argv[1] + i) < 65 && ((int)*(argv[1] + i) > 57 || (int)*(argv[1] + i) < 48)) || (int)*(argv[1] + i) > (54 + base)) {
+				printf("Invalid argument(s)\nUsage: ./gcd int1 int2 <base>\n");
+				return 5;
+			}
 		}
 		if((base < 11) && ((int)*(argv[1] + i) < 48 || (int)*(argv[1] + i) > (47 + base))) {
 			printf("Invalid Argument(s)\nUsage: ./gcd int1 int2 <base>\n");
@@ -34,13 +45,21 @@ int main(int argc, char *argv[]) {
 	}
 	i = 0;
 	while(*(argv[2] + i) != '\0') {
-		if((base < 11) && (int)*(argv[2] + i) < 48 || (int)*(argv[2] + i) > (47 + base)) {
+		if(base > 10) {
+			if(((int)*(argv[2] + i) > 96) && ((int)*(argv[2] + i) < (87 + base))) {
+				*(argv[2] + i) = *(argv[2] + i) - 32;
+			} else if(((int)*(argv[2] + i) < 65 && ((int)*(argv[2] + i) > 57 || (int)*(argv[2] + i) < 48)) || (int)*(argv[2] + i) > (54 + base)) {
+				printf("Invalid argument(s)\nUsage: ./gcd int1 int2 <base>\n");
+				return 5;
+			}
+		}
+		if((base < 11) && ((int)*(argv[2] + i) < 48 || (int)*(argv[2] + i) > (47 + base))) {
 			printf("Invalid Argument(s)\nUsage: ./gcd int1 int2 <base>\n");
 			return 3;
 		}
 		i++;
 	}
-	//FIXME this only works for base 1 - 10. add support for base 11+ using ascii vals.
+	//FIXME accept (-) in argv[1] and argv[2]
 
 	int a = strtol(argv[1], &e, base), b = strtol(argv[2], &e, base);
 	int r = 0, s = 1;
