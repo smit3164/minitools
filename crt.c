@@ -1,7 +1,5 @@
 // Chinese Remainder Theorem calculator
-// Accept a, b, m, and n
-// Given x [cong] a (mod m) AND x [cong] b (mod n)
-// output x
+
 #include <stdio.h>
 #include <stdlib.h>
 
