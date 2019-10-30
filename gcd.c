@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
 		return 2;
 	}
 
-	//extended euclidean algo
+	//extended euclidean algo FIXME new stuff
 	while(t > 0) {
 		q = g/t;
 		u = x - (q*r);
