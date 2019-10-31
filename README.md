@@ -11,4 +11,9 @@ and outputs, c (modular inverse of m), d(modular inverse of n), and the solution
 mod mn.
 	Known Bugs:
 
+Prime Number Detector: Accepts input for any integer up to INT_MAX (+2147483647) and tells you if it is prime or
+not.
+	Known Bugs:
+	Future update will expand functionality to include numbers greater than INT_MAX
+
 More to come!
